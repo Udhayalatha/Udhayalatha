@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Resume Builder</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ line-height: 1.6;
+ margin: 2;
+ padding: 2;
+ background-color: #f4f4f4;
+ }
+ header {
+ background-color: #333;
+ color: #fff;
+ text-align: center;
+ padding: 20px;
+ }
+ main {
+ max-width: 800px;
+ margin: 20px auto;
+ padding: 20px;
+ background-color: #fff;
+ border-radius: 8px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+ form {
+ display: flex;
+ flex-direction: column;
+ }
+ label {
+ margin-bottom: 8px;
+ font-weight: bold;
+ }
+ input, textarea {
+ margin-bottom: 16px;
+ padding: 8px;
+ }
+ button {
+ padding: 10px;
+ background-color: dodgerblue;
+ color: #fff;
+ border: red;
+ cursor: pointer;
+ }
+ img {
+ max-width: 10%;
+ margin-top: 20px;
+ border-radius: 8px;
+ }
+ </style>
+</head>
+<body>
+ <header>
+ <h1>Resume Builder</h1>
+ </header>
+ <main>
+ <form id="resumeForm"> 
+ <label for="image">Profile Image:</label>
+ <input type="file" accept="image/*" id="image" name="image">
+ <label for="fullName">Full Name:</label>
+ <input type="text" id="fullName" name="fullName" required>
+ <label for="age">Age:</label>
+ <input type="age" id="age" name="age" required>
+ <label for="email">Email:</label>
+ <input type="email" id="email" name="email" required>
+ <label for="phone">Phone:</label>
+ <input type="tel" id="phone" name="phone" required>
+ <label for="education">Education:</label>
+ <textarea id="education" name="education" rows="4" required></textarea>
+ <label for="workshop">Workshop:</label>
+ <textarea id="workshop" name="workshop" rows="4" required></textarea>
+ <label for="experience">Professional Experience:</label>
+ <textarea id="experience" name="experience" rows="3" required></textarea>
+ <label for="skills">Skills:</label>
+ <textarea id="skills" name="skills" rows="3" required></textarea>
+ 
+ <label for="interest">Interest:</label>
+ <textarea id="interest" name="interest" rows="5" required></textarea>
+ <label for="extracurriculars">Extracurriculars:</label>
+ <textarea id="extracurriculars" name="extracurriculars" rows="3" required></textarea>
+ <label for="presentation">Presentation:</label>
+ <textarea id="presentation" name="presentation" rows="2" required></textarea>
+ <button type="button" onclick="generateResume()">Generate Resume</button>
+ </form>
+ <div id="resumeOutput"></div>
+ </main>
+ <script>
+ function generateResume() {
+ const image = document.getElementById('image').files[0];
+ const fullName = document.getElementById('fullName').value;
+ const age = document.getElementById('age').value;
+ const email = document.getElementById('email').value;
+ const education = document.getElementById('education').value;
+ const phone = document.getElementById('phone').value;
+ const experience = document.getElementById('experience').value;
+ const skills = document.getElementById('skills').value;
+ const interest = document.getElementById('interest').value;
+ const extracurriculars= document.getElementById('extracurriculars').value;
+ const workshop= document.getElementById('workshop').value;
+ const presentation= document.getElementById('presentation').value;
+ const resumeOutput = document.getElementById('resumeOutput');
+ const reader = new FileReader();
+ reader.onload = function (e) {
+ const imageSrc = e.target.result;
+ resumeOutput.innerHTML = `
+ <h2>${fullName}</h2>
+ <p>Email: ${email} | Phone: ${phone}</p>
+ <img src="${imageSrc}" alt="Profile Image">
+ <h3>Professional Experience</h3>
+ <p>${experience}</p>
+ <h3>education</h3>
+ <p>${education}</p>
+ <h3>Skills</h3>
+ <p>${skills}</p>
+ <h3>workshop</h3>
+ <p>${workshop}</p>
+ <h3>interest</h3>
+ <p>${interest}</p>
+ <h3>extracurriculars</h3>
+ <p>${extracurriculars}</p>
+ <h3>presentation</h3>
+ <p>${presentation}</p>
+ `;
+ };
+ reader.readAsDataURL(image);
+ }
+ </script>
+</body>
+</html>
